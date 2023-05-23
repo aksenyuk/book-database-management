@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <style>
+    #top-right {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    #bottom-right {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        overflow: scroll;
+        height: 400px;
+        width: 500px;
+    }
+
+    #list-books-head {
+        display: flex; 
+        justify-content: space-between; 
+    }
+    #getListOfBooks {
+        height: 40px;
+    }
+  </style> -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    #changed-layout {
+        display: flex; 
+        justify-content: space-between; 
+        max-width: 800px;
+    }
+    #changed-layout-2 {
+        display: flex; 
+        justify-content: space-between; 
+        max-width: 800px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    input[type="text"],
+    input[type="submit"] {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 200px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    #top-right {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    #bottom-right {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      overflow: auto;
+      height: 400px;
+      width: 500px;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    #list-books-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    #get_list_button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    #all_books {
+      margin-top: 0;
+    }
+  </style>
+  <title>Library</title>
+</head>
+<body>
+  <h1>Library</h1>
+
+  <div id="changed-layout">
+    
+    <div>
+      <h2>Add Book</h2>
+      <label for="bookName">Book Name:</label>
+      <input type="text" id="addBookName">
+      <br>
+      <label for="bookAuthor">Author:</label>
+      <input type="text" id="addBookAuthor">
+      <br>
+      <label for="bookYear">Year:</label>
+      <input type="text" id="addBookYear">
+      <br>
+      <label for="bookPublisher">Publisher:</label>
+      <input type="text" id="addBookPublisher">
+      <br>
+      <input type="submit" id="add_button" value="Add">
+    </div>
+  
+    
+    <div>
+      <h2>Reserve Book</h2>
+      <label for="reserveBookName">Book Name:</label>
+      <input type="text" id="reserveBookName">
+      <br>
+      <label for="reserverCardId">Reserver Card ID:</label>
+      <input type="text" id="reserveCardId">
+      <br>
+      <input type="submit" id="reserve_button" value="Reserve">
+    </div>
+  
+    
+
+  </div>
+
+  <div id="changed-layout-2">
+    <div>
+      <h2>Remove Book</h2>
+      <label for="removeBookName">Book Name:</label>
+      <input type="text" id="removeBookName">
+      <br>
+      <input type="submit" id="remove_button" value="Remove">
+    </div>
+  
+    <div>
+      <h2>Return Book</h2>
+      <label for="returnBookName">Book Name:</label>
+      <input type="text" id="returnBookName">
+      <br>
+      <input type="submit" id="return_button" value="Return">
+    </div>
+  </div>
+
+
+
+  <h2>Book Information</h2>
+  <div>
+    <label for="infoBookName">Book Name:</label>
+    <input type="text" id="infoBookName">
+    <br>
+    <input type="submit" id="info_button" value="Get Info">
+  </div>
+
+
+  
+
+  <br>
+  <br>
+  <div id="top-right">
+    <h2>Output</h2>
+    <p id="result" name="result"></p>
+  </div>
+
+  <div id="bottom-right">
+    <div id="list-books-head">
+        <h2>List of All Books</h2>
+        <input type="submit" id="get_list_button" value="Get List">
+    </div>
+    <p id="all_books" name="all_books"></p>
+  </div>
+
+
+  <script>
+    document.getElementById("add_button").addEventListener("click", function() {
+        var addBookName = document.getElementById("addBookName").value;
+        var addBookAuthor = document.getElementById("addBookAuthor").value;
+        var addBookYear = document.getElementById("addBookYear").value;
+        var addBookPublisher = document.getElementById("addBookPublisher").value;
+        var data = {
+            'button': 'add_button',
+            'addBookName': addBookName,
+            'addBookAuthor': addBookAuthor,
+            'addBookYear': addBookYear,
+            'addBookPublisher': addBookPublisher
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    });
+
+    document.getElementById("info_button").addEventListener("click", function() {
+        var infoBookName = document.getElementById("infoBookName").value;
+        var data = {
+            'button': 'info_button',
+            'infoBookName': infoBookName
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    });
+
+    document.getElementById("remove_button").addEventListener("click", function() {
+        var removeBookName = document.getElementById("removeBookName").value;
+        var data = {
+            'button': 'remove_button',
+            'removeBookName': removeBookName
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    });
+
+    document.getElementById("reserve_button").addEventListener("click", function() {
+        var reserveBookName = document.getElementById("reserveBookName").value;
+        var reserveCardId = document.getElementById("reserveCardId").value;
+        var data = {
+            'button': 'reserve_button',
+            'reserveBookName': reserveBookName,
+            'reserveCardId': reserveCardId
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    });
+
+    document.getElementById("return_button").addEventListener("click", function() {
+        var returnBookName = document.getElementById("returnBookName").value;
+        var data = {
+            'button': 'return_button',
+            'returnBookName': returnBookName
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    });
+
+    document.getElementById("get_list_button").addEventListener("click", function() {
+        var data = {
+            'button': 'get_list_button'
+        };
+        fetch('/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("all_books").innerHTML = data.books;
+        });
+    });
+
+  </script>
+
+</body>
+</html>
