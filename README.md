@@ -4,6 +4,8 @@ The System makes it possible to make, update/cancel, see book reservation, as we
 
 All the operations are handled through a webpage.
 
+Read Report: [Report](https://raw.githubusercontent.com/Giminosk/book-database-management/main/REPORT.md)
+
 ## How to run it
 
 - Build image: `docker build -t my_flask_server:latest .`
