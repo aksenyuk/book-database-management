@@ -12,7 +12,7 @@ The System makes it possible to make, update/cancel, see book reservation, as we
 
 All the operations are handled through a webpage.
 
-Read Report: [Report](https://raw.githubusercontent.com/Giminosk/book-database-management/main/REPORT.md)
+Read Report: [Report](https://github.com/Giminosk/book-database-management/blob/main/REPORT.md)
 
 ## How to run it
 
