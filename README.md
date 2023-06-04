@@ -8,4 +8,5 @@ All the operations are handled through a webpage.
 
 - Build image: `docker build -t my_flask_server:latest .`
 - Start app: `docker compose up`
+    - Access webpage via search tab: `localhost:80`
 - Run stress tests: `bash run_tests.sh`
